@@ -50,7 +50,7 @@ public class ApiDate {
 		calendars.set(year, month - 1, 1); // 해당 월의 1일 날짜
 		System.out.println(sdf.format(calendars.getTime()));
 
-		int lastDay = calendars.getActualMaximum(Calendar.DAY_OF_MONTH);
+		int lastDay = calendars.getActualMaximum(Calendar.DAY_OF_MONTH); // 월의 마지막 일(날짜)
 		System.out.println(lastDay);
 
 		int dayOfWeek = calendars.get(Calendar.DAY_OF_WEEK);
@@ -79,8 +79,8 @@ public class ApiDate {
 	{
 		Calendar calendars = Calendar.getInstance();
 		calendars.set(year, month - 1, 1);
-		int lastDay = calendars.getActualMaximum(Calendar.DAY_OF_MONTH); //
-		int dayOfWeek = calendars.get(Calendar.DAY_OF_WEEK); //
+		int lastDay = calendars.getActualMaximum(Calendar.DAY_OF_MONTH);
+		int dayOfWeek = calendars.get(Calendar.DAY_OF_WEEK); 
 		System.out.println();
 		System.out.println(year + "년" + month + "월 달력");
 		System.out.print("월\t화\t수\t목\t금");
