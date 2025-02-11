@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -14,11 +15,32 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class ApiJson {
-
-	//upbit rest api 코인 종목 리스트, get방식, json 데이터 형태
+public class CoinMain {
+	public static void main(String[] args) throws IOException, ParseException {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("코인 정보 시스템입니다.");
 		
-	public static void main(String[] args) throws Exception {
+		// 코인 종목코드 출력
+		CoinList();
+		
+		while(true) {
+			System.out.println("\n어떤 종목을 보여들리까요?(end:q)");
+			String msg = scan.nextLine();
+			if(msg.equals("q")) {
+				System.out.println("종료");
+				break;
+			}
+			
+			// 해당 코인의 최저가(low), 최고가(high), 현재가(trade) 출력
+			JSONObject resultObj = getCoin(msg);
+			DecimalFormat format = new DecimalFormat("#,###.##");
+			System.out.println("trade_price : " + format.format(resultObj.get("trade_price")) + "원");
+			System.out.println("low_price : " + format.format(resultObj.get("low_price")) + "원");
+			System.out.println("high_price : " + format.format(resultObj.get("high_price")) +"원");
+		}
+	}
+	
+	public static void CoinList() throws IOException, ParseException {
 		String coinInfoUrl = "https://api.upbit.com/v1/market/all";
 		
 		URL url = new URL(coinInfoUrl);
@@ -47,18 +69,9 @@ public class ApiJson {
 				System.out.println("market:" + obj.get("market"));
 				System.out.println("kor:" + obj.get("korean_name"));
 			}
-			
-			System.out.println("상세 정보 =========================");
-			JSONObject resultObj = getCoin("KRW-BTC");
-			System.out.println(resultObj.get("trade_date"));
-			System.out.println(resultObj.get("trade_price"));
-			
-			// 표기법 변경
-			DecimalFormat format = new DecimalFormat("#,###.##");
-			System.out.println(format.format(resultObj.get("trade_price")));
 		}
 	}
-	// in : String(코인코드)   out :  JSONObject(해당 코인 현재 정보)
+	
 	public static JSONObject getCoin(String code) throws IOException, ParseException {
 		String detailUrl = "https://api.upbit.com/v1/ticker?markets=" + code; //  
 		URL url = new URL(detailUrl);
