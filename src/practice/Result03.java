@@ -7,6 +7,42 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
+
+
+public class Result03 {
+	public static void main(String[] args) {
+		String [] userNum = {"2", "12"};
+		System.out.println(makeLotto(userNum));
+	}
+	public static ArrayList<Integer> makeLotto(){ // 자동추첨
+		ArrayList<Integer> numbers = new ArrayList<>();
+		String [] arr = new String[0];
+		numbers = makeLotto(arr);
+		return numbers;
+		
+	}
+	public static ArrayList<Integer> makeLotto(String[] arr){ // 입력값이 있는 추첨
+		ArrayList<Integer> numbers = new ArrayList<Integer>();
+		for(int i=0; i<arr.length; i++) {
+			numbers.add(Integer.parseInt(arr[i]));
+		}
+		while(numbers.size()<6) {
+			int lotto = (int)(Math.random() *45 + 1);
+			boolean isEqual = false;
+			for(int i=0; i<numbers.size(); i++) {
+				if(lotto == numbers.get(i)) {
+					isEqual = true;
+				}
+			}
+			if(!isEqual) {
+				numbers.add(lotto);
+			}
+		}
+		Collections.sort(numbers);
+		return numbers;
+	}
+}
+/*
 public class Result03 {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
@@ -42,7 +78,7 @@ public class Result03 {
 			System.out.println("\n이번주 행운의 번호는");
 			System.out.println(weekLottoc.toString());
 		}
-		
+	}
 	}
 	public static ArrayList<Integer> makeLotto(int[] strArr)
 	{
@@ -77,4 +113,5 @@ public class Result03 {
 		
 		return lottoList;
 	}
-}
+}	
+*/
