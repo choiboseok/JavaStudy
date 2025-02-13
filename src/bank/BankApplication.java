@@ -20,10 +20,7 @@ public class BankApplication {
 			if (sel == 5) {
 				System.out.println("프로그램 종료");
 				break;
-			}
-
-			// 계좌 생성
-			if (sel == 1) {
+			}else if (sel == 1) { // 계좌 생성
 				Account acc = new Account();
 				System.out.println("------------");
 				System.out.println("게좌생성");
@@ -33,24 +30,19 @@ public class BankApplication {
 				System.out.print("계좌주:");
 				acc.name = scan.next();
 				System.out.print("초기입금액:");
-				acc.money = scan.next();
+				acc.money = scan.nextInt();
 				
 				account.add(acc);
-//				account.add(acc.number + "  " + acc.name + "  " + acc.money);
 				System.out.println("결과: 계좌가 생성되었습니다.");
-			}
-			// 계좌 목록
-			if (sel == 2) {
+			}else if (sel == 2) { // 계좌 목록
 				Account acc = new Account();
 				System.out.println("------------");
 				System.out.println("게좌목록");
 				System.out.println("------------");
-				for(int i=0; i<account.size(); i++) {
-					
+				for(Account str: account) {
+					System.out.println(str.getNumber()+"  "+str.getName()+"  "+str.getMoney());
 				}
-			}
-			// 예금
-			if (sel == 3) {
+			}else if (sel == 3) { // 예금
 				Account acc = new Account();
 				System.out.println("------------");
 				System.out.println("예금");
@@ -58,15 +50,13 @@ public class BankApplication {
 				System.out.print("계좌번호:");
 				acc.number = scan.next();
 				System.out.print("예금액:");
-				acc.money = scan.next();
-				for(int i=0; i<account.size(); i++) {
-					if(account.get(i).equals("")) {
-						
+				acc.money = scan.nextInt();
+				for(Account str: account) {
+					if(str.getNumber().equals(acc.number)) {
+						str.money += acc.money;
 					}
 				}
-			}
-			// 출금
-			if (sel == 4) {
+			}else if (sel == 4) { // 출금
 				Account acc = new Account();
 				System.out.println("------------");
 				System.out.println("출금");
@@ -74,8 +64,13 @@ public class BankApplication {
 				System.out.print("계좌번호:");
 				acc.number = scan.next();
 				System.out.print("출금액:");
-				acc.money = scan.next();
-			}
+				acc.money = scan.nextInt();
+				for(Account str: account) {
+					if(str.getNumber().equals(acc.number)) {
+						str.money -= acc.money;
+					}
+				}
+			} else {System.out.println("다시 입력");}
 		}
 	}
 }
