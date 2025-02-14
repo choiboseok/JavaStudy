@@ -10,5 +10,13 @@ public class Practice {
 		
 		int result = Math.abs(num2-num1);
 		System.out.println(result);
+		System.out.println(result);
+		System.out.println(result);
+		System.out.println(result);
+		System.out.println(result);
+		System.out.println(result);
+		System.out.println(result);
+		System.out.println(result);
+		
 	}
 }
