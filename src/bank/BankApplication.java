@@ -31,7 +31,6 @@ public class BankApplication {
 				acc.name = scan.next();
 				System.out.print("초기입금액:");
 				acc.money = scan.nextInt();
-				
 				account.add(acc);
 				System.out.println("결과: 계좌가 생성되었습니다.");
 			}else if (sel == 2) { // 계좌 목록
