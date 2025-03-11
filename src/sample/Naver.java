@@ -54,7 +54,7 @@ public class Naver {
    }
 
    public static void main(String[] args) {
-      String query = "특수동물병원";
+      String query = "거북이";
       String result = getNaver(query);
       // JSON 파서 생성
       JSONParser parser = new JSONParser();
